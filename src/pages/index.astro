@@ -1,0 +1,19 @@
+---
+import { getDollar } from "../utils/bcv"
+
+const dolar = await getDollar()
+---
+
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Precio dolar</title>
+	</head>
+	<body>
+		<h1>Dolar: {dolar}</h1>
+	</body>
+</html>
