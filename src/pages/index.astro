@@ -36,14 +36,19 @@ const dolar = await getDollar();
 		<meta name="generator" content={Astro.generator} />
 		<title>Calculadollar</title>
 	</head>
-	<body>
+	<body class="bg-slate-900">
 		<section class="container mx-auto h-svh">
 			<div class="flex justify-center items-center h-svh">
-				<div class="bg-teal-800 rounded-lg w-[400px] p-8">
-					<h2 class="text-lg font-semibold text-slate-200 mb-4">
+				<div class="bg-teal-800 rounded-lg w-[400px] p-8 m-4 shadow-md">
+					<h2
+						class="text-2xl font-semibold text-slate-200 mb-4 text-center md:text-left"
+					>
 						Calculadollar
 					</h2>
-					<form id="form" class="form flex gap-2 mb-6">
+					<form
+						id="form"
+						class="form flex flex-col md:flex-row items-center gap-6 md:gap-2 mb-6"
+					>
 						<input
 							id="amount"
 							type="number"
@@ -54,7 +59,7 @@ const dolar = await getDollar();
 						/>
 						<button
 							type="submit"
-							class="bg-slate-400 py-2 px-6 rounded-md"
+							class="bg-slate-400 py-2 px-12 md:px-8 rounded-md"
 							>Calcular</button
 						>
 					</form>
