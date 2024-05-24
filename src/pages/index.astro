@@ -1,9 +1,32 @@
 ---
-import { getDollar } from "../utils/bcv"
+import { getDollar } from "../utils/bcv";
 
-const dolar = await getDollar()
+const dolar = await getDollar();
 ---
 
+<script define:vars={{ dolar }}>
+	document.addEventListener("DOMContentLoaded", function () {
+		const $form = document.querySelector("#form");
+		const $amount = document.querySelector("#amount");
+		const $result = document.querySelector("#result");
+
+		$amount.addEventListener("input", function () {
+			$result.textContent = "Bs.S 0.00";
+		});
+
+		$form?.addEventListener("submit", function (e) {
+			e.preventDefault();
+			const amount = +$amount?.value;
+			let result = amount * dolar;
+			result = new Intl.NumberFormat("es-VE", {
+				style: "currency",
+				currency: "VES",
+			}).format(result);
+			$result.textContent = result;
+			$amount.focus();
+		});
+	});
+</script>
 
 <html lang="en">
 	<head>
@@ -11,9 +34,38 @@ const dolar = await getDollar()
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Precio dolar</title>
+		<title>Calculadollar</title>
 	</head>
 	<body>
-		<h1>Dolar: {dolar}</h1>
+		<section class="container mx-auto h-svh">
+			<div class="flex justify-center items-center h-svh">
+				<div class="bg-teal-800 rounded-lg w-[400px] p-8">
+					<h2 class="text-lg font-semibold text-slate-200 mb-4">
+						Calculadollar
+					</h2>
+					<form id="form" class="form flex gap-2 mb-6">
+						<input
+							id="amount"
+							type="number"
+							class="p-2 rounded-md focus:outline-0 flex-1 w-full"
+							placeholder="0.00"
+							step="any"
+							required
+						/>
+						<button
+							type="submit"
+							class="bg-slate-400 py-2 px-6 rounded-md"
+							>Calcular</button
+						>
+					</form>
+					<div class="flex justify-between items-center">
+						<h6 class="text-slate-200">BCV: ${dolar}</h6>
+						<h6 class="text-slate-200 text-lg">
+							<span id="result">Bs.S 0.00</span>
+						</h6>
+					</div>
+				</div>
+			</div>
+		</section>
 	</body>
 </html>
