@@ -1,10 +1,20 @@
 ---
 import { getDollar } from "../utils/bcv";
 
+const UsdFormat = new Intl.NumberFormat("es-VE", {
+	style: "currency",
+	currency: "VES",
+});
 const dolar = await getDollar();
+const dolarFormated = UsdFormat.format(dolar);
 ---
 
-<script define:vars={{ dolar }}>
+<script define:vars={{ dolarFormated, dolar }}>
+	const VesFormat = new Intl.NumberFormat("es-VE", {
+		style: "currency",
+		currency: "VES",
+	});
+
 	document.addEventListener("DOMContentLoaded", function () {
 		const $form = document.querySelector("#form");
 		const $amount = document.querySelector("#amount");
@@ -18,10 +28,7 @@ const dolar = await getDollar();
 			e.preventDefault();
 			const amount = +$amount?.value;
 			let result = amount * dolar;
-			result = new Intl.NumberFormat("es-VE", {
-				style: "currency",
-				currency: "VES",
-			}).format(result);
+			result = VesFormat.format(result);
 			$result.textContent = result;
 			$amount.focus();
 		});
@@ -64,7 +71,7 @@ const dolar = await getDollar();
 						>
 					</form>
 					<div class="flex justify-between items-center">
-						<h6 class="text-slate-200">BCV: ${dolar}</h6>
+						<h6 class="text-slate-200">BCV: {dolarFormated}</h6>
 						<h6 class="text-slate-200 text-lg">
 							<span id="result">Bs.S 0.00</span>
 						</h6>
