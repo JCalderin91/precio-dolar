@@ -8,6 +8,14 @@ const VesFormat = new Intl.NumberFormat("es-VE", {
 
 const dolar = await getDollar();
 const vesFormated = VesFormat.format(dolar);
+
+const date = new Date();
+const formatter = new Intl.DateTimeFormat("es-VE", {
+	year: "numeric",
+	month: "long",
+	day: "numeric",
+});
+const formattedDate = formatter.format(date);
 ---
 
 <script define:vars={{ vesFormated, dolar }}>
@@ -57,22 +65,25 @@ const vesFormated = VesFormat.format(dolar);
 		<meta name="generator" content={Astro.generator} />
 		<title>Calculadolar</title>
 	</head>
-	<body class="bg-slate-900">
+	<body class="bg-slate-950">
 		<section class="container mx-auto h-svh">
 			<div class="flex justify-center items-center h-svh">
-				<div class="bg-teal-800 rounded-lg w-[400px] p-8 m-4 shadow-md">
+				<div class="bg-teal-800 rounded-lg w-[400px] p-8 m-4 shadow-2xl shadow-teal-300/20 sh">
 					<h2
 						class="text-2xl font-semibold text-teal-300 mb-4 text-center"
 					>
 						💲Calculadolar💲
 					</h2>
 					<div class="text-center mb-4 relative">
-						<h6 class="text-slate-100 font-semibold">
-							BCV: {vesFormated}
+						<h6 class="text-slate-50 text-lg">
+							BCV: <span class="font-semibold text-white"
+								>{vesFormated}</span
+							>
 						</h6>
+						
 					</div>
 					<section
-						class="form flex flex-col md:flex-row items-end gap-6 md:gap-2 mb-6 justify-between"
+						class="form flex items-end gap-6 sm:gap-2 mb-6 justify-between"
 					>
 						<div class="flex flex-col w-36">
 							<label for="usdAmount" class="text-white text-sm"
@@ -95,7 +106,7 @@ const vesFormated = VesFormat.format(dolar);
 					</section>
 
 					<section
-						class="form flex flex-col md:flex-row items-end gap-6 md:gap-2 mb-6 justify-between"
+						class="form flex items-end gap-6 md:gap-2 mb-6 justify-between"
 					>
 						<div class="flex flex-col w-36">
 							<label for="vesAmount" class="text-white text-sm"
@@ -116,6 +127,7 @@ const vesFormated = VesFormat.format(dolar);
 							>$0.00</span
 						>
 					</section>
+					<h6 class="text-center text-slate-300">{formattedDate}</h6>
 				</div>
 			</div>
 		</section>
